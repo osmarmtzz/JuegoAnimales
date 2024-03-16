@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilos.css">
+    <link rel="icon" href="imagenes/LogoImg.png" type="image/x-icon">
+    <title>LA CASA DE LOS ANIMALES - REGISTRO</title>
+</head>
+<body>
+    <br><br><br>
+    <div class="title-container">
+        <h1 class="animated-title">LA CASA DE LOS ANIMALES</h1>
+    </div>
+    <img style="width: 290px;" src="imagenes/LogoImg.png" alt="2">
+    <br>
+    <input type="text" id="alias" placeholder="       Ingresa tu Nombre"><br><br>
+        <button class="boton" id="botonJugar">INICIAR JUEGO</button>
+
+        <script src="script.js"></script>
+</body>
+<script>
+    var botonJugar = document.getElementById("botonJugar");
+
+    botonJugar.addEventListener("click", function() {
+        var alias = document.getElementById("alias").value.trim();
+
+        if (alias === "") {
+            alert("INGRESA UN NOMBRE DE USUARIO PARA JUGAR!");
+            window.location.href = "alias.html";
+        } else {
+            localStorage.setItem("alias", alias);
+            alert("USUARIO REGISTRADO: " + alias);
+            window.location.href = "juego.html";
+        }
+    });
+</script>
+</html>

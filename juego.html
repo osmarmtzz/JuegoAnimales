@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="script jue/script.js" defer></script>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="imagenes/LogoImg.png" type="image/x-icon">
+  <title>LA CASA DE LOS ANIMALES - GAME</title>
+  <style>
+    body {
+      background-image: url(imagenes/FondoJuego3.gif);
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      height: 100vh;
+    }
+
+    #contenedor-info {
+      padding: 15px;
+      border-radius: 10px;
+      margin-right: 20px;
+      text-align: left;
+    }
+
+    #cronometro, #puntuacion, #pista {
+      margin: 10px 0;
+      font-size: 18px;
+      font-weight: bold;
+      position: fixed;
+    }
+
+    #pista{
+      position: relative;
+    }
+    
+    #casa, .contenedor {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .animal {
+      width: 150px;
+      height: 150px;
+      margin: 10px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+      background-color: white;
+    }
+
+    .animal img {
+      width: 90%;
+      height: 90%;
+      object-fit: cover;
+    }
+
+    .nombre-animal {
+      text-align: center;
+      margin-top: 5px;
+      font-weight: bold;
+      font-family: 'Comic Sans MS', 'Arial', sans-serif;
+      font-size: large;
+    }
+    #ventana-pista {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      background-image: url(imagenes/FondoAyuda.png);
+      background-repeat: no-repeat;
+      background-size: cover;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      z-index: 1000;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      max-width: 400px;
+      text-align: center;
+    }
+
+    #cerrar-ventana {
+      cursor: pointer;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 18px;
+      color: #555;
+    }
+
+    #boton-pista {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      cursor: pointer;
+      width: 30px;
+      height: 30px;
+      background-image: url(imagenes/Pista.png);
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    #boton-pista:hover {
+      background-color: orange;
+      transform: scale(1.0);
+    }
+
+    header{
+      text-align: end;
+    }
+    .boton3 {
+      background-color: rgb(187, 0, 0);
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 10px auto; 
+      cursor: pointer;
+      border-radius: 8px; 
+    }
+
+    .boton3:hover {
+      background-color: #ffffff;
+      color: darkred;
+    }
+    #aliasPlaceholder{
+      font-size: 50px;
+      position: relative;
+      color: #cc4d29;
+      text-shadow: 0 0 10px rgba(0, 128, 38, 0.8);
+    }
+    #botonSalir {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  background-color: #920000; /* Color de fondo verde */
+  color: #ffffff; 
+  border: 2px solid #7c0000; 
+  border-radius: 5px; 
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#botonSalir:hover {
+  background-color: #ffffff;
+  color: #7c0000;
+}
+  </style>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+<header>
+  <button id="pista" style="border: none; background-color: rgba(255, 255, 255, 0);" onclick="mostrarVentanaPista()"><img style="width: 100px;" src="imagenes/Pista.png" alt="0"></button>
+  <button style="border: none; background-color: rgba(255, 255, 255, 0);" id="boton-musica" onclick="toggleMusica()"><img style="width: 100px;" src="imagenes/PlayPause.png" alt="12"></button>
+  <audio id="miMusica" src="Sonidos/swing-110485.mp3" loop></audio>
+  <div style="background-color: #dddddd8f;" id="aliasContainer">
+    <center><span id="aliasPlaceholder"></span></center>
+  </div>    
+</header>
+<body>
+  
+  <div id="contenedor-info">
+    <img style="position: fixed; width: 300px;" src="imagenes/cartel.png" alt="8">
+    <br><br><br>
+    <div id="cronometro">
+      ▶︎TIEMPO TRANSCURRIDO: 00:00</div>
+    <br><br><br>
+    <div id="puntuacion">▶︎PUNTUACIÓN: 0</div>
+    <br>
+  </div>
+  <div id="ventana-pista">
+    <span id="cerrar-ventana" onclick="cerrarVentanaPista()">&times;</span>
+    <h2 style="color: darkgreen; font-weight: bold;">¿Qué hacer?</h2>
+    <p style="font-weight: bolder;">Ayuda arrastrando la imagen del animalito a ¡llegar a su casa!</p>
+  </div>
+  <div class="casa" id="casa" ondrop="drop(event)" ondragover="allowDrop(event)">
+  </div>
+  <div class="contenedor" id="contenedor-animales" ondrop="drop(event)" ondragover="allowDrop(event)">
+  </div>
+  <audio id="audioAnimal"></audio>
+  <center><button id="botonSalir" class="boton" onclick="salirDelJuego()">Salir del Juego</button></center>
+  <script src="script jue/script.js"></script>
+</body>
+<script>
+   function salirDelJuego() {
+    var confirmacion = confirm("¿SEGURO QUE QUIERES SALIR DEL JUEGO?");
+    if (confirmacion) {
+      // Redirigir al usuario a index.html
+      window.location.href = "index.html";
+    }
+  }
+</script>
+</html>

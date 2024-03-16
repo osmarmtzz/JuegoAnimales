@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resultado del Juego</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-image: url(imagenes/FondoAyuda.png);
+      background-size: cover;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    h1 {
+      color: #4CAF50;
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 1.5em;
+      letter-spacing: 2px;
+    }
+
+    #resultado-container {
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      padding: 20px;
+      text-align: center;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    p {
+      margin: 10px 0;
+      font-size: 1.2em;
+      color: #333;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    button {
+      margin: 15px;
+      padding: 10px 20px;
+      font-size: 1em;
+      cursor: pointer;
+      background-color: #460b7e;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #ffffff;
+      color: #460b7e;
+    }
+  </style>
+</head>
+<br><br><br>
+<body>
+  <div id="resultado-container">
+    <p id="mensaje"></p>
+    <p id="puntuacion"></p>
+    <p id="tiempo"></p>
+    <p id="mensajeMotivacional"></p>
+    <button id="volverAJugar" onclick="volverAJugar()">Volver a Jugar</button>
+    <button id="volverAlInicio" onclick="volverAlInicio()">Volver al Inicio</button>
+  </div>
+  <img src="imagenes/Rana.gif" alt="">
+</body>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const alias = urlParams.get('alias');
+    const puntuacion = urlParams.get('puntuacion');
+    const tiempo = urlParams.get('tiempo');
+
+    // Actualizar los elementos HTML con los valores
+    document.getElementById('mensaje').innerText = `¡FELICICDADES, ${alias}!`;
+    document.getElementById('puntuacion').innerText = `▶︎PUNTUACION: ${puntuacion}`;
+    document.getElementById('tiempo').innerText = ` ${tiempo}`;
+
+    const mensajeMotivacional = "¡Eres increíble! Has demostrado ser un verdadero explorador. Sigue así y nunca dejes de aprender y divertirte. ¡Felicidades de nuevo!";
+    document.getElementById('mensajeMotivacional').innerText = mensajeMotivacional;
+  });
+  function volverAJugar() {
+    // Aquí debes redirigir a la página de juego (ajusta la URL según tu estructura)
+    window.location.href = "juego.html";
+  }
+
+  function volverAlInicio() {
+    // Aquí debes redirigir a la página de inicio (ajusta la URL según tu estructura)
+    window.location.href = "index.html";
+  }
+</script>
+
+</html>

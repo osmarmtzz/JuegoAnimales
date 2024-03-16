@@ -1,0 +1,25 @@
+.contenedor {
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  padding: 10px;
+}
+
+.casa,
+.animal {
+  text-align: center;
+  padding: 20px;
+}
+
+.casa > img {
+  width: 20vw;
+  height: 20vh;
+}
+
+.animal > img {
+  width: 15vw;
+  height: 15vh;
+}
+#cronometro {
+  margin-top: 20px;
+  font-size: 20px;
+}

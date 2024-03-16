@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilos.css">
+    <link rel="icon" href="imagenes/LogoImg.png" type="image/x-icon">
+    <title>LA CASA DE LOS ANIMALES - INICIO</title>
+</head>
+<body>
+    <br><br><br>
+    <div class="title-container">
+        <h1 class="animated-title">LA CASA DE LOS ANIMALES</h1>
+    </div>
+    <img style="width: 290px;" src="imagenes/LogoImg.png" alt="2">
+    <br>
+    <button class="boton" onclick="continuar()">CONTINUAR</button>
+    <br><br>
+    <button style="font-size: 30px;" class="boton" id="botonCreditos" onclick="Creditos()">CREDITOS</button>
+
+    <script src="reproductorMusica.js"></script>
+    <script>
+        function continuar() {
+            iniciarMusica();
+
+            // Almacenar el estado de reproducción en una cookie
+            document.cookie = "musicaReproduciendose=true; path=/";
+
+            // Redirigir después de reproducir durante unos segundos (opcional)
+            setTimeout(function() {
+                window.location.href = "alias.html";
+            }, 2000);  // Cambia este valor a la cantidad de milisegundos que desees
+        }
+        function Creditos() {
+            iniciarMusica2();
+            document.cookie = "musicaReproduciendose=true; path=/";
+            // Redirigir a la página "creditos.html"
+            setTimeout(function(){
+                window.location.href = "creditos.html";
+            }, 4000);   
+        }
+    </script>
+</body>
+</html>
